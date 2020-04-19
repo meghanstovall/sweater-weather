@@ -1,7 +1,7 @@
 class GoogleService
 
   def self.get_coordinates(location)
-    data = get_json("/maps/api/geocode/json?address=#{location}&key=#{ENV['GOOGLE_API_KEY']}")
+    get_json("/maps/api/geocode/json?address=#{location}&key=#{ENV['GOOGLE_API_KEY']}")
   end
 
   private
