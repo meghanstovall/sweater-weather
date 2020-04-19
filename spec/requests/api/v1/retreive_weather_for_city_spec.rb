@@ -11,4 +11,15 @@ RSpec.describe "Google Geocoding and Open Weather API's" do
     expect(json[:data][:attributes][:longitude]).to eq(-104.990251)
     expect(json[:data][:attributes][:location]).to eq("Denver, CO, USA")
   end
+
+  it "can get forecast data for a location" do
+    get "/api/v1/forecast?location=denver,co"
+
+    json = JSON.parse(response.body, symbolize_names: true)
+
+    expect(json[:data][:attributes].has_key?(:current)).to eq(true)
+    expect(json[:data][:attributes].has_key?(:hourly)).to eq(true)
+    expect(json[:data][:attributes].has_key?(:daily)).to eq(true)
+
+  end
 end
