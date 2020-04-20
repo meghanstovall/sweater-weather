@@ -8,8 +8,8 @@ RSpec.describe "Antipode's" do
     json = JSON.parse(response.body, symbolize_names: true)[:data]
 
     expect(json[:attributes][:search_location]).to eq("Hong Kong")
-    expect(json[:attributes].has_key?(:location_name))
-    expect(json[:attributes][:forecast].has_key?(:summary))
-    expect(json[:attributes][:forecast].has_key?(:current_temp))
+    expect(json[:attributes][:location_name].include?("Argentina")).to eq(true)
+    expect(json[:attributes][:forecast].has_key?(:summary)).to eq(true)
+    expect(json[:attributes][:forecast].has_key?(:current_temp)).to eq(true)
   end
 end
