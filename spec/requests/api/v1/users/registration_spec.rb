@@ -16,8 +16,8 @@ RSpec.describe "User Registration" do
     json = JSON.parse(response.body, symbolize_names: true)[:data]
 
     expect(json).to have_key(:attributes)
-    expect(json[:attributes]).to have_key(:email)
-    expect(json[:attributes]).to have_key(:api_token)
+    expect(json[:attributes][:email]).to eq("meghan@gmail.com")
+    expect(json[:attributes][:api_key].class).to eq(String)
   end
 
   it "throuws 400 level error if email is already in use" do

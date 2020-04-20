@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2020_04_20_205744) do
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
-    t.string "api_token"
+    t.string "api_key"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
