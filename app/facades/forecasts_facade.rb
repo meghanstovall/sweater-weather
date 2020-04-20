@@ -1,6 +1,6 @@
 class ForecastsFacade
 
-  attr_reader :id, :location, :latitude, :longitude, :current, :hourly, :daily
+  attr_reader :id, :location, :latitude, :longitude, :current, :hourly, :daily, :summary
 
   def initialize(location)
     coords = GoogleService.get_coordinates(location)
@@ -13,5 +13,6 @@ class ForecastsFacade
     @current = data[:current]
     @hourly = data[:hourly]
     @daily = data[:daily]
+    @summary = data[:current][:weather][0][:description]
   end
 end
