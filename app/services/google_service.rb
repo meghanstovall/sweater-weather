@@ -5,7 +5,7 @@ class GoogleService
   end
 
   def self.get_city_name(lat, long)
-    get_json("/maps/api/geocode/json?latlng=#{lat},#{long}&key=#{ENV['GOOGLE_API_KEY']}")
+    get_json("/maps/api/geocode/json?latlng=#{lat},#{long}&key=#{ENV['GOOGLE_API_KEY']}")[:results][0][:formatted_address]
   end
 
   private

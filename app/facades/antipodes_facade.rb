@@ -3,21 +3,35 @@ class AntipodesFacade
   attr_reader :id, :location_name, :forecast, :search_location
 
   def initialize(location)
-    antipode_forecast = ForecastsFacade.new(get_antipode_name(location))
-
-    @id = nil
-    @location_name = get_antipode_name(location)
-    @forecast = {summary: antipode_forecast.summary, current_temp:  antipode_forecast.current[:temp]}
     @search_location = location
+    @location_name = antipode_name
+    @forecast = antipode_forecast
+    @id = nil
   end
 
-  def get_antipode_name(location)
-    location_forecast = ForecastsFacade.new(location)
+  def get_antipode
+    location = get_location_forecast
+    antipode = AntipodeService.get_antipode(location.lat, location.long)
+  end
 
-    antipode = AntipodeService.get_antipode(location_forecast.latitude, location_forecast.longitude)
-    antipode_lat = antipode[:data][:attributes][:lat]
-    antipode_long = antipode[:data][:attributes][:long]
+  def get_location_forecast
+    location_forecast = ForecastsFacade.new(@search_location)
+  end
 
-    antipode_name = GoogleService.get_city_name(antipode_lat, antipode_long)[:results][0][:formatted_address]
+  def antipode_lat
+    get_antipode[:data][:attributes][:lat]
+  end
+
+  def antipode_long
+    get_antipode[:data][:attributes][:long]
+  end
+
+  def antipode_name
+    GoogleService.get_city_name(antipode_lat, antipode_long)
+  end
+
+  def antipode_forecast
+    forecast = ForecastsFacade.new(antipode_name)
+    {summary: forecast.summary, current_temp: forecast.current[:temp]}
   end
 end
