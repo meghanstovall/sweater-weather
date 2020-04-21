@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Google Geocoding and Open Weather API's" do
-  it "get lat and long for a city and use that for Weather API to return name" do
+  it "get lat and long for a city and use that for Weather API to return name", :vcr do
     get "/api/v1/forecast?location=denver,co"
 
     expect(response).to be_successful
@@ -11,7 +11,7 @@ RSpec.describe "Google Geocoding and Open Weather API's" do
     expect(json[:data][:attributes][:location]).to eq("Denver, CO, USA")
   end
 
-  it "can get forecast data for a location" do
+  it "can get forecast data for a location", :vcr do
     get "/api/v1/forecast?location=denver,co"
 
     json = JSON.parse(response.body, symbolize_names: true)

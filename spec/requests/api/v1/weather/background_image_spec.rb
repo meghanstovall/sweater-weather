@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe "Unsplash API" do
-  it "can get a background image from API" do
+  it "can get a background image from API", :vcr do
     get "/api/v1/backgrounds?location=denver,co"
 
     expect(response).to be_successful

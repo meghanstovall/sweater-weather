@@ -5,7 +5,7 @@ RSpec.describe "User login" do
     @user = User.create!(email: "meghan.stovall@gmail.com", password: "password1")
   end
 
-  it "returns user's api key after logging in" do
+  it "returns user's api key after logging in", :vcr do
     params = {email: @user.email, password: @user.password}
 
     post "/api/v1/sessions", params: params
@@ -18,7 +18,7 @@ RSpec.describe "User login" do
     expect(json[:attributes][:api_key].class).to eq(String)
   end
 
-  it "returns 400 level error when credentials are bad" do
+  it "returns 400 level error when credentials are bad", :vcr do
     params = {email: @user.email, password: "pass1"}
 
     post "/api/v1/sessions", params: params

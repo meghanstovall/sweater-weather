@@ -1,7 +1,7 @@
 class WeatherService
 
   def self.get_forecast(lat, lng)
-    get_json("/data/2.5/onecall?lat=#{lat}&lon=#{lng}&appid=#{ENV['WEATHER_API_KEY']}")
+    get_json("/data/2.5/onecall?lat=#{lat}&lon=#{lng}&units=imperial&appid=#{ENV['WEATHER_API_KEY']}")
   end
 
   private

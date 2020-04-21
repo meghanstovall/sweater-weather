@@ -14,6 +14,7 @@
 #
 require 'simplecov'
 SimpleCov.start
+require 'vcr'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
@@ -96,4 +97,13 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+end
+
+VCR.configure do |config|
+  config.ignore_localhost = true
+  config.cassette_library_dir = 'spec/cassettes'
+  config.hook_into :webmock
+  config.configure_rspec_metadata!
+  config.ignore_localhost = true
+  config.default_cassette_options = { record: :new_episodes }
 end
