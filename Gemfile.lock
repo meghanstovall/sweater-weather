@@ -201,6 +201,7 @@ GEM
     tilt (2.0.10)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
+    vcr (5.1.0)
     web-console (4.0.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -239,6 +240,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   simplecov
   tzinfo-data
+  vcr
   web-console (>= 3.3.0)
   webpacker (~> 4.0)
 
