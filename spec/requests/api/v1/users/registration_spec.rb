@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "User Registration" do
   before :each do
-    @user = User.create!(email: "meghan.stovall@gmail.com", password: "password1")
+    @user = User.create!(email: "meghan.stovall@gmail.com", password: "password1", api_key: ENV['DIRECTIONS_API_KEY'])
   end
 
   it "can send json with user email, password, and password confirmation", :vcr do
