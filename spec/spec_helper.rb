@@ -15,6 +15,7 @@
 require 'simplecov'
 SimpleCov.start
 require 'vcr'
+require 'shoulda/matchers'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

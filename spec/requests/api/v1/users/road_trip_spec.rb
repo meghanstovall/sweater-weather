@@ -20,4 +20,15 @@ RSpec.describe "Road Trip endpoint" do
     expect(json[:attributes][:arrival_forecast].has_key?(:temp)).to eq(true)
     expect(json[:attributes][:arrival_forecast].has_key?(:description)).to eq(true)
   end
+
+  it "will get 401 error with api key is invalid", :vcr do
+    params = {origin: "Denver,CO", destination: "Pueblo,CO", api_key: ""}
+
+    post "/api/v1/road_trip", params: params
+
+    json = JSON.parse(response.body, symbolize_names: true)[:data]
+
+    expect(json[:attributes][:status]).to eq(401)
+    expect(json[:attributes][:message]).to eq("Unauthorized")
+  end
 end
