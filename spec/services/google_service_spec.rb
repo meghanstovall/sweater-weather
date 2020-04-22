@@ -9,4 +9,11 @@ RSpec.describe "Google Service" do
     expect(service[:results][0][:geometry][:location][:lat]).to eq(39.7392358)
     expect(service[:results][0][:geometry][:location][:lng]).to eq(-104.990251)
   end
+
+  it "can connect to API and get direction info", :vcr do
+    service = GoogleService.get_road_trip("Denver,CO", "Pueblo,CO")
+
+    expect(service.class).to eq(Hash)
+    expect(service[:routes].class).to eq(Array)
+  end
 end

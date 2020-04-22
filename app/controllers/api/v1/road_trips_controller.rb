@@ -5,7 +5,7 @@ class Api::V1::RoadTripsController < ApplicationController
       response.status = :unauthorized
       render json: ResponseSerializer.new(Response.new(response))
     else
-      render json: RoadTripSerializer.new(RoadTripsFacade.new(params[:origin], params[:destination], params[:api_key]))
+      render json: RoadTripSerializer.new(RoadTripsFacade.new(params[:origin], params[:destination]))
     end
   end
 end

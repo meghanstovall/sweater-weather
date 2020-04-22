@@ -2,8 +2,8 @@ class RoadTripsFacade
 
   attr_reader :id, :origin, :destination, :travel_time, :arrival_forecast
 
-  def initialize(origin, destination, api_key)
-    @api_key = api_key
+  # talk to service and create poro to hold onto info from service
+  def initialize(origin, destination)
     @origin = origin
     @destination = destination
     @travel_time = trip_duration[:text]
@@ -11,7 +11,7 @@ class RoadTripsFacade
   end
 
   def trip_duration
-    data = DirectionsService.get_road_trip(@origin, @destination, @api_key)
+    data = GoogleService.get_road_trip(@origin, @destination)
     data[:routes][0][:legs][0][:duration]
   end
 
